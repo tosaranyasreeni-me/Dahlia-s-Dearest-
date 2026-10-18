@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Haven — For Dahlia's Dearest</title>
+    <style>
+        :root {
+            --cherry-red: #8B0000;
+            --navy-blue: #0B132B;
+            --gold: #D4AF37;
+            --deep-space: #010205;
+            --gothic-dark: #070913;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cinzel', 'Georgia', serif;
+            user-select: none;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+            color: #f1f5f9;
+        }
+
+        /* Cinematic Full-Screen Viewport Stages */
+        .cinema-stage {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+        }
+
+        .cinema-stage.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Audio Gateway Shield */
+        #audio-shield {
+            background-color: var(--deep-space);
+            z-index: 9999;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        #audio-shield button {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            transition: all 0.6s ease;
+            box-shadow: 0 0 30px rgba(214, 175, 87, 0.2);
+        }
+
+        #audio-shield button:hover {
+            background: var(--gold);
+            color: black;
+            box-shadow: 0 0 50px rgba(214, 175, 87, 0.6);
+        }
+
+        /* Stage 1 & 2 Typography */
+        #summoning-text {
+            font-size: 3.8rem;
+            color: #d11a2a;
+            text-shadow: 2px 2px 8px #3a0000, 0 0 30px rgba(209,26,42,0.6);
+            font-weight: 900;
+            letter-spacing: 8px;
+            transform: scale(0.85);
+            transition: transform 5s cubic-bezier(0.1, 0.8, 0.2, 1);
+            text-align: center;
+            padding: 20px;
+        }
+
+        #summoning-text.grow {
+            transform: scale(1.05);
+        }
+
+        .envelope-container {
+            perspective: 1500px;
+            cursor: pointer;
+        }
+
+        .envelope {
+            position: relative;
+            width: 520px;
+            height: 330px;
+            background: var(--navy-blue);
+            border: 2px solid var(--gold);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.95), inset 0 0 60px rgba(214,175,55,0.25);
+            transform-style: preserve-3d;
+            transition: transform 1.8s ease;
+        }
+
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0; height: 0;
+            border-left: 260px solid transparent;
+            border-right: 260px solid transparent;
+            border-top: 165px solid rgba(214, 175, 87, 0.3);
+            transform-origin: top;
+            transition: transform 1.5s ease 0.3s;
+            z-index: 3;
+        }
+
+        .envelope.open::before {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-text {
+            position: absolute;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--gold);
+            font-size: 1.3rem;
+            letter-spacing: 4px;
+            text-align: center;
+            padding: 30px;
+        }
+
+        #letter-reveal {
+            background: rgba(1, 2, 5, 0.98);
+            flex-direction: column;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .romantic-font {
+            font-style: italic;
+            font-size: 2.4rem;
+            color: #f8f9fa;
+            line-height: 2;
+            max-width: 950px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        /* Blackhole Simulation Canvas */
+        #blackhole-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        .terminal-container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 30px;
+        }
+
+        .typing-box {
+            font-size: 1.8rem;
+            color: var(--gold);
+            letter-spacing: 3px;
+            min-height: 70px;
+            line-height: 1.7;
+            text-shadow: 0 0 15px rgba(214,175
